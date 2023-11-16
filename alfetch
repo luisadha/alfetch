@@ -22,7 +22,7 @@ cl5="${magenta}"
 cl6="${cyan}"
 cl7="${white}"
 cl9="${reset}"
-num=2
+num="2"
 _s1_char='┌'
 _p2_char='┘'
 _s2_char='└'
@@ -35,10 +35,10 @@ _len_char=$(echo "$_char" | wc -L)
 _cur_cols=$(tput cols) # $(stty size | cut -d" " -f2)
 _min_cols=$(echo "$(tput cols) - $_len_char" | bc)
 _len_amazing_char=$(echo -e "$_amazing_char" | wc -w)
-_final_amazing_char=$(echo -e "$_len_amazing_char * $num" | bc)
+_final_amazing_char=$(echo -e "$_len_amazing_char * 2" | bc)
 _calc=$(echo -e "$_min_cols - $_final_amazing_char" | bc)
 _fill_blank=$(printf %"$_calc"s | tr " " "$_draw_char")
-autoline_wrap=$(echo "$COLUMNS + $num" | bc)
+
 
 # example usage
 #printf %"$_min_cols"s && echo "$_char"
@@ -142,7 +142,7 @@ kernel() {
 
 
 function fetch() {
-
+local autoline_wrap=$(echo "$COLUMNS + 2" | bc)
   local opt="$1" val="$2" border="$3"
   printf %"$_min_cols"s && echo -e "$border\r${opt}" "${val}" | cut -c1-$autoline_wrap
 }
