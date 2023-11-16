@@ -4,10 +4,17 @@
 
 # Instalation
 
+## Install
+
 ```sh 
 curl -fSsl "https://codeberg.org/luisadha/alfetch/raw/branch/main/alfetch" -o ~/.local/bin/alfetch && chmod +x ~/.local/bin/alfetch
 ```
 
+## Uninstall
+
+```sh
+rm -f ~/.local/bin/alfetch && rm -rf ~/.config/alfetch
+```
 
 # configuration
 
