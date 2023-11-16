@@ -1,6 +1,6 @@
 #!/bin/bash
 # Alfetch - a CLI Bash script to show system information on Android devices in termux 
-# Version : v0.0.3
+# Version : v0.0.4
 # Created : 9 November 2023
 # Copyright (c) 2023 Luis Adha
 
@@ -22,6 +22,7 @@ cl5="${magenta}"
 cl6="${cyan}"
 cl7="${white}"
 cl9="${reset}"
+num=2
 _s1_char='┌'
 _p2_char='┘'
 _s2_char='└'
@@ -34,9 +35,10 @@ _len_char=$(echo "$_char" | wc -L)
 _cur_cols=$(tput cols) # $(stty size | cut -d" " -f2)
 _min_cols=$(echo "$(tput cols) - $_len_char" | bc)
 _len_amazing_char=$(echo -e "$_amazing_char" | wc -w)
-_final_amazing_char=$(echo -e "$_len_amazing_char * 2" | bc)
+_final_amazing_char=$(echo -e "$_len_amazing_char * $num" | bc)
 _calc=$(echo -e "$_min_cols - $_final_amazing_char" | bc)
 _fill_blank=$(printf %"$_calc"s | tr " " "$_draw_char")
+autoline_wrap=$(echo "$COLUMNS + $num" | bc)
 
 # example usage
 #printf %"$_min_cols"s && echo "$_char"
@@ -142,8 +144,7 @@ kernel() {
 function fetch() {
 
   local opt="$1" val="$2" border="$3"
-  printf %"$_min_cols"s && echo -e "$border\r${opt}" "${val}"
-
+  printf %"$_min_cols"s && echo -e "$border\r${opt}" "${val}" | cut -c1-$autoline_wrap
 }
 function header() {                                                     
 
