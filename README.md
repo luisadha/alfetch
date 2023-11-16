@@ -7,7 +7,7 @@
 ## Install
 
 ```sh 
-curl -fSsl "https://raw.githubusercontent.com/luisadha/alfetch/v0.0.4/alfetch" -o ~/.local/bin/alfetch && chmod +x ~/.local/bin/alfetch
+curl -fSsl "https://raw.githubusercontent.com/luisadha/alfetch/main/alfetch" -o ~/.local/bin/alfetch && chmod +x ~/.local/bin/alfetch
 ```
 
 ## Uninstall
