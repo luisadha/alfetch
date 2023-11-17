@@ -138,8 +138,7 @@ fi
 
 
 if [ "$(basename "$SHELL")" = "zsh" ]; then
-  zsh_version=$(echo "$ZSH_VERSION" | cut -d" " -f2)
-  echo "zsh $zsh_version"
+  echo "zsh $ZSH_VERSION"
 fi; }
 
 kernel() {
