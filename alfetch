@@ -135,7 +135,11 @@ if [ "$(basename "$SHELL")" = "bash" ]; then
   bash_version=$(bash --version | grep 'bash' | head -n1 | awk '{print $4}' | sed 's/\(.*\)(1)-release.*/\1/')
   echo -n "bash $bash_version"
 fi
-if [ "$(basename "$SHELL")" = "zsh" ]; then                  echo -n "zsh " && echo "$ZSH_VERSION" | cut -d" " -f2
+
+
+if [ "$(basename "$SHELL")" = "zsh" ]; then
+  zsh_version=$(echo "$ZSH_VERSION" | cut -d" " -f2)
+  echo "zsh $zsh_version"
 fi; }
 
 kernel() {
