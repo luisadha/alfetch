@@ -165,6 +165,10 @@ function footer() {
   #"$_p1_char\r${_s1_char}"
 }
 
+function use_color() {
+  local arg1="$*";
+  lolcrab -c "$arg1"
+}
 
 function move_space() {   
   local arg1=$1;                                             
