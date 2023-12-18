@@ -24,7 +24,7 @@ Location of the readable configuration place.
 ~/.config/alfetch/alfetch.config.conf
 ```
 
-## Download latest config (Rekomendations)
+## Download latest config (Recomendations)
 
 ```sh
 curl -LO https://raw.githubusercontent.com/luisadha/alfetch/v0.0.5-lts/alfetch.config.conf
