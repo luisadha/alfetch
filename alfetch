@@ -1,10 +1,14 @@
 #!/bin/bash
 # Alfetch - a CLI Bash script to show system information on Android devices in termux 
-# Version : v0.0.5
+# Version : v0.0.5b
 # Created : 9 November 2023
 # Copyright (c) 2023 Luis Adha
 
-version="v0.0.5"
+version="v0.0.5c"
+# 0.0.5b
+# ~ Fix bug minor
+# ~ Replace tr to sed
+
 reset="\033[0m"
 gray="\033[1;90m"
 red="\033[1;31m"
@@ -29,7 +33,7 @@ _p2_char='┘'
 _s2_char='└'
 _p1_char='┐'
 _char='|'
-_draw_char='-' # ─
+_draw_char='─' #━' # ─ # - # =
 _amazing_char_def="${cl0}  ${cl1} ${cl2} ${cl3} ${cl4} ${cl5} ${reset}"
 _amazing_char=${_amazing_char:-$_amazing_char_def}
 _len_char=$(echo "$_char" | wc -L)
@@ -38,7 +42,7 @@ _min_cols=$(echo "$(tput cols) - $_len_char" | bc)
 _len_amazing_char=$(echo -e "$_amazing_char" | wc -w)
 _final_amazing_char=$(echo -e "$_len_amazing_char * 2" | bc)
 _calc=$(echo -e "$_min_cols - $_final_amazing_char" | bc)
-_fill_blank=$(printf %"$_calc"s | tr " " "$_draw_char")
+_fill_blank=$(printf %"$_calc"s | sed "s/ /$_draw_char/g")
 
 
 # example usage
@@ -147,22 +151,19 @@ kernel() {
 
 
 function fetch() {
-local autoline_wrap=$(echo "$COLUMNS + 2" | bc)
+  local autoline_wrap=$(echo "${_cur_cols} + 2" | bc)
   local opt="$1" val="$2" border="$3"
   printf %"$_min_cols"s && echo -e "$border\r${opt}" "${val}" | cut -c1-$autoline_wrap
 }
-function header() {                                                     
-
+function header() {             
   local pre_char="$1" suf_char="$2" add_char="$3"
-  printf %"${_min_cols}"s | tr " " "$add_char" && echo -e "${pre_char}\r${suf_char}" 
+  printf %"${_min_cols}"s | sed "s/ /${add_char}/g" && echo -e "${pre_char}\r${suf_char}" 
   
  }
 
 function footer() {
-
   local pre_char="$1" suf_char="$2" add_char="$3"
-  printf %"${_min_cols}"s | tr " " "$add_char" && echo -e "${pre_char}\r${suf_char}"$_fill_blank"${_amazing_char}"
-  #"$_p1_char\r${_s1_char}"
+  printf %"${_min_cols}"s | sed "s/ /${add_char}/g" && echo -e "${pre_char}\r${suf_char}"$_fill_blank"${_amazing_char}"
 }
 
 function use_color() {
@@ -194,7 +195,15 @@ fetch ${_char}" "" "" uptime >>" "$(uptime)" "${_char}"
 fetch ${_char}" "" "" packages >>" "$(packages)" "${_char}"
 default_header
 }
+ALFETCH_CONF_VCODE='005'
+[ ! -d ~/.config/alfetch ] && mkdir -p ~/.config/alfetch #&& echo berhasi  lbuat
 
-[ ! -d ~/.config/alfetch ] && mkdir -p ~/.config/alfetch #&& echo berhasilbuat
-[ -f ~/.config/alfetch/alfetch.config.conf ] && source ~/.config/alfetch/alfetch.config.conf || main
-
+if [ -f ~/.config/alfetch/alfetch.config.conf ]; then #echo found
+   if [ $(cat ~/.config/alfetch/alfetch.config.conf | grep -o "ALFETCH_CONF_VCODE='005") == "$ALFETCH_CONF_VCODE" ]; then
+      source ~/.config/alfetch/alfetch.config.conf 
+   else
+      echo "Wrong config!"; #main
+   fi
+else
+     main
+fi
