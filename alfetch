@@ -196,4 +196,3 @@ default_header
 
 [ ! -d ~/.config/alfetch ] && mkdir -p ~/.config/alfetch #&& echo berhasilbuat
 [ -f ~/.config/alfetch/alfetch.config.conf ] && source ~/.config/alfetch/alfetch.config.conf || main
-z
