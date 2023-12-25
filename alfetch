@@ -4,7 +4,7 @@
 # Created : 9 November 2023
 # Copyright (c) 2023 Luis Adha
 
-version="v0.0.5b"
+version="v0.0.5c"
 # 0.0.5b
 # ~ Fix bug minor
 # ~ Replace tr to sed
@@ -195,6 +195,15 @@ fetch ${_char}" "" "" uptime >>" "$(uptime)" "${_char}"
 fetch ${_char}" "" "" packages >>" "$(packages)" "${_char}"
 default_header
 }
+ALFETCH_CONF_VCODE='005'
+[ ! -d ~/.config/alfetch ] && mkdir -p ~/.config/alfetch #&& echo berhasi  lbuat
 
-[ ! -d ~/.config/alfetch ] && mkdir -p ~/.config/alfetch #&& echo berhasilbuat
-[ -f ~/.config/alfetch/alfetch.config.conf ] && source ~/.config/alfetch/alfetch.config.conf || main
+if [ -f ~/.config/alfetch/alfetch.config.conf ]; then #echo found
+   if [ $(cat ~/.config/alfetch/alfetch.config.conf | grep -o "ALFETCH_CONF_VCODE='005") == "$ALFETCH_CONF_VCODE" ]; then
+      source ~/.config/alfetch/alfetch.config.conf 
+   else
+      echo "Wrong config!"; #main
+   fi
+else
+     main
+fi
