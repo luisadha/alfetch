@@ -198,11 +198,10 @@ default_header
 
 
 
-[ ! -d ~/.config/alfetch ] && mkdir -p ~/.config/alfetch #&& ech
-o berhasi  lbuat
+[ ! -d ~/.config/alfetch ] && mkdir -p ~/.config/alfetch
 
-if [ -f ~/.config/alfetch/alfetch.config.conf ]; then #echo foun
-d
+if [ -f ~/.config/alfetch/alfetch.config.conf ]; then
+
 
 conf_value=$(awk -F"'" '/ALFETCH_CONF_VCODE/{print $2}' ~/.confi
 g/alfetch/alfetch.config.conf)
