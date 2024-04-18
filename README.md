@@ -1,6 +1,6 @@
-## alfetch
-
- Alfetch - a CLI Bash script to show system information on Android devices in termux.
+## alfetch [NO LONGER MAINTAINED]
+NOTE:
+WE FOCUS ON DEVELOPING THIS MODULE ONLY IN ALRC-TERMUX THERE MAY BE NO MORE UPDATES HERE.
 
 ## Instalation
 
