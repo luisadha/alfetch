@@ -195,7 +195,7 @@ function default_header() {
 export -f ismytermux mytermux_font mytermux_colorscheme _song _os _term _arch _date _battery _uptimes _packages _shell _kernel
 
 
-results=$(parallel ::: \
+#results=$(parallel ::: \
     "_os" \
     "_arch" \
     "_term" \
@@ -207,19 +207,20 @@ results=$(parallel ::: \
     "_uptime" \
     "_packages")
 
-mapfile -t outputs <<< "$results"
+#mapfile -t outputs <<< "$results"
 
-get_os=${outputs[0]}
-get_arch=${outputs[1]}
-get_term=${outputs[2]}
-get_date=${outputs[3]}
-get_song=${outputs[4]}
-get_kernel=${outputs[5]}
-get_shell=${outputs[6]}
-get_battery=${outputs[7]}
-get_uptime=${outputs[8]}
-get_packages=${outputs[9]}
+get_os=$(_os)
+get_arch=$(_arch)
+get_term=$(_term)
+get_date=$(_date)
+get_song=$(_song)
+get_kernel=$(_kernel)
+get_shell=$(_shell)
+get_battery=$(_battery)
+get_uptime=$(_uptime)
+get_packages=$(_packages)
 
+wait
 
 
 function main() {
