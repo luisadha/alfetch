@@ -4,7 +4,7 @@
 # Created : 9 November 2023
 # Copyright (c) 2023 Luis Adha
 #set -xv
-version="v0.0.5c"
+version="v0.0.7"
 ALFETCH_CONF_VCODE='005'
 # 0.0.5b
 # ~ Fix bug minor
@@ -184,6 +184,7 @@ function default_header() {
   printf %"$COLUMNS"s | tr " " "-"
 }
 get_os="$(os)"
+get_arch="$(arch)"
 get_term="$(term)"
 get_date="$(_date)"
 get_song="$(song)"
@@ -196,15 +197,15 @@ get_packages="$(packages)"
 function main() {
 default_header
 default_header
-fetch ${_char}" "" "" os >>" "$(os) ($(arch))" "${_char}"
-fetch ${_char}" "" "" term >>" "$(term)" "${_char}"
-fetch ${_char}" "" "" date >>" "$(date)" "${_char}"
-fetch ${_char}" "" "" song >>" "$(song)" "${_char}"
-fetch ${_char}" "" "" kernel >>" "$(kernel)" "${_char}"
-fetch ${_char}" "" "" shell >>" "$(shell)" "${_char}"
-fetch ${_char}" "" "" battery >>" "$(get_battery)" "${_char}"
-fetch ${_char}" "" "" uptime >>" "$(uptime)" "${_char}"
-fetch ${_char}" "" "" packages >>" "$(packages)" "${_char}"
+fetch ${_char}" "" "" os >>" "${get_os} (${get_arch})" "${_char}"
+fetch ${_char}" "" "" term >>" "${get_term}" "${_char}"
+fetch ${_char}" "" "" date >>" "${get_date}" "${_char}"
+fetch ${_char}" "" "" song >>" "${get_song}" "${_char}"
+fetch ${_char}" "" "" kernel >>" "${get_kernel}" "${_char}"
+fetch ${_char}" "" "" shell >>" "${get_shell}" "${_char}"
+fetch ${_char}" "" "" battery >>" "${get_battery}" "${_char}"
+fetch ${_char}" "" "" uptime >>" "${get_uptime}" "${_char}"
+fetch ${_char}" "" "" packages >>" "${get_packages}" "${_char}"
 default_header
 }
 
