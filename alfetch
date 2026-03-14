@@ -109,32 +109,32 @@ export -f _os _arch _term _date _kernel _shell _packages _uptimes _battery _song
 
 # Run all tasks in background and wait
 (
-  cached os _os > /tmp/_os.txt &
-  cached arch _arch > /tmp/_arch.txt &
-  cached term _term > /tmp/_term.txt &
-  cached date _date > /tmp/_date.txt &
-  cached kernel _kernel > /tmp/_kernel.txt &
-  cached shell _shell > /tmp/_shell.txt &
-  cached packages _packages > /tmp/_packages.txt &
-  cached uptimes _uptimes > /tmp/_uptimes.txt &
-  cached battery _battery > /tmp/_battery.txt &
-  cached song _song > /tmp/_song.txt &
+  cached os _os > $PREFIX/tmp/_os.txt &
+  cached arch _arch > $PREFIX/tmp/_arch.txt &
+  cached term _term > $PREFIX/tmp/_term.txt &
+  cached date _date > $PREFIX/tmp/_date.txt &
+  cached kernel _kernel > $PREFIX/tmp/_kernel.txt &
+  cached shell _shell > $PREFIX/tmp/_shell.txt &
+  cached packages _packages > $PREFIX/tmp/_packages.txt &
+  cached uptimes _uptimes > $PREFIX/tmp/_uptimes.txt &
+  cached battery _battery > $PREFIX/tmp/_battery.txt &
+  cached song _song > $PREFIX/tmp/_song.txt &
   wait
 )
 
 # Read results
-get_os=$(< /tmp/_os.txt)
-get_arch=$(< /tmp/_arch.txt)
-get_term=$(< /tmp/_term.txt)
-get_date=$(< /tmp/_date.txt)
-get_kernel=$(< /tmp/_kernel.txt)
-get_shell=$(< /tmp/_shell.txt)
-get_packages=$(< /tmp/_packages.txt)
-get_uptime=$(< /tmp/_uptimes.txt)
-get_battery=$(< /tmp/_battery.txt)
-get_song=$(< /tmp/_song.txt)
+get_os=$(< $PREFIX/tmp/_os.txt)
+get_arch=$(< $PREFIX/tmp/_arch.txt)
+get_term=$(< $PREFIX/tmp/_term.txt)
+get_date=$(< $PREFIX/tmp/_date.txt)
+get_kernel=$(< $PREFIX/tmp/_kernel.txt)
+get_shell=$(< $PREFIX/tmp/_shell.txt)
+get_packages=$(< $PREFIX/tmp/_packages.txt)
+get_uptime=$(< $PREFIX/tmp/_uptimes.txt)
+get_battery=$(< $PREFIX/tmp/_battery.txt)
+get_song=$(< $PREFIX/tmp/_song.txt)
 
-rm /tmp/_*.txt
+rm $PREFIX/tmp/_*.txt
 
 # ---------
 
