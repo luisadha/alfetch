@@ -99,7 +99,7 @@ mytermux_font() {
 mytermux_colorscheme() {
   cat ~/.config/mytermux/colorscheme/used.log | sed "s/\.colors//g"; }
 
-song() {
+_song() {
 isPlaying() {
 
  termux-media-player info | awk '{print $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' | grep -v "Position:" | xargs
@@ -113,12 +113,15 @@ elif [ $(isPlaying | awk '{print $1}') == "Paused" ]; then       echo "$(isPlayi
 else                                                             echo "No $(isPlaying)"
 fi; 
 }
-os() {
-  echo -n "$(uname -so)"; }
-term() {
-  echo -n "$TERM"; }
-arch() {
- uname -m || dpkg --print-architecture; }
+_os() {
+  echo -n "$(uname -so)";
+}
+_term() {
+  echo -n "$TERM"; 
+}
+_arch() {
+ uname -m || dpkg --print-architecture; 
+}
 _date() {
   command date; 
 }
@@ -130,17 +133,18 @@ if [ $(termux-battery-status | grep "status" | cut -d":" -f2 | tr "[:upper:]" "[
 echo "Discharging"
 else
 echo "Charging"
-fi; }
-uptimes() {
+fi; 
+}
+_uptimes() {
  uptime --pretty;
 }
-function packages() {
+function _packages() {
  local prefix="$PREFIX/bin" 2> /dev/null;
  local sysroot="$SYSROOT/bin" 2> /dev/null;
  local packages_termux="$(command ls ${prefix} 2> /dev/null | wc -l || command ls ${sysroot} 2> /dev/null | wc -l) (usr/bin) " &> /dev/null;
  echo -n "$packages_termux"; 
 }
-function shell() {
+function _shell() {
 if [ "$(basename "$SHELL")" = "bash" ]; then
   bash_version=$(bash --version | grep 'bash' | head -n1 | awk '{print $4}' | sed 's/\(.*\)(1)-release.*/\1/')
   echo -n "bash $bash_version";
@@ -151,7 +155,7 @@ else
 fi; 
 }
 
-kernel() {
+_kernel() {
   uname -r; 
 }
 
@@ -188,20 +192,20 @@ function default_header() {
   printf %"$COLUMNS"s | tr " " "-"
 }
 
-export -f ismytermux mytermux_font mytermux_colorscheme song os term arch _date _battery uptimes packages shell kernel
+export -f ismytermux mytermux_font mytermux_colorscheme _song _os _term _arch _date _battery _uptimes _packages _shell _kernel
 
 
 results=$(parallel ::: \
-    "os" \
-    "arch" \
-    "term" \
+    "_os" \
+    "_arch" \
+    "_term" \
     "_date" \
-    "song" \
-    "kernel" \
-    "shell" \
+    "_song" \
+    "_kernel" \
+    "_shell" \
     "_battery" \
-    "uptime" \
-    "packages")
+    "_uptime" \
+    "_packages")
 
 mapfile -t outputs <<< "$results"
 
