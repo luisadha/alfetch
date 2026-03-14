@@ -132,13 +132,15 @@ else
 echo "Charging"
 fi; }
 uptimes() {
- uptime --pretty; }
-packages() {
+ uptime --pretty;
+}
+function packages() {
  local prefix="$PREFIX/bin" 2> /dev/null;
  local sysroot="$SYSROOT/bin" 2> /dev/null;
  local packages_termux="$(command ls ${prefix} 2> /dev/null | wc -l || command ls ${sysroot} 2> /dev/null | wc -l) (usr/bin) " &> /dev/null;
- echo -n "$packages_termux"; }
-shell() {
+ echo -n "$packages_termux"; 
+}
+function shell() {
 if [ "$(basename "$SHELL")" = "bash" ]; then
   bash_version=$(bash --version | grep 'bash' | head -n1 | awk '{print $4}' | sed 's/\(.*\)(1)-release.*/\1/')
   echo -n "bash $bash_version";
@@ -146,10 +148,12 @@ elif [ "$(basename "$SHELL")" = "zsh" ]; then
   echo "zsh $ZSH_VERSION";
 else
   echo "unknown";
-fi; }
+fi; 
+}
 
 kernel() {
-  uname -r; }
+  uname -r; 
+}
 
 
 
