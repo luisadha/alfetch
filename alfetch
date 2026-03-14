@@ -123,9 +123,7 @@ get_date() {
   command date; 
 }
 get_battery() {
- local batt="$(termux-battery-status 2>&1 | grep -cq 'command not found' || termux-battery-status | head -n 3 | awk '{print $2}' | tail -n 1 | sed 's/,/%/g')";
-    local batteries="${batt:-$(echo "unknown")}" > /dev/null 2>&1;
-    echo -n "$batteries"; 
+ termux-battery-status | jq -r '"\(.percentage)% \(.status | gsub("_"; " ") | ascii_downcase)"'
 }
 battery_state() {
 if [ $(termux-battery-status | grep "status" | cut -d":" -f2 | tr "[:upper:]" "[:lower:]" | sed "s/\,//g" | sed "s/\"//g" | xargs | sed "s/^/D/g" | cut -c 1,3-12) == "Discharging" ]; then
@@ -195,7 +193,7 @@ fetch ${_char}" "" "" date >>" "$(date)" "${_char}"
 fetch ${_char}" "" "" song >>" "$(song)" "${_char}"
 fetch ${_char}" "" "" kernel >>" "$(kernel)" "${_char}"
 fetch ${_char}" "" "" shell >>" "$(shell)" "${_char}"
-fetch ${_char}" "" "" battery >>" "$(battery)" "${_char}"
+fetch ${_char}" "" "" battery >>" "$(get_battery)" "${_char}"
 fetch ${_char}" "" "" uptime >>" "$(uptime)" "${_char}"
 fetch ${_char}" "" "" packages >>" "$(packages)" "${_char}"
 default_header
