@@ -183,11 +183,17 @@ function default_header() {
 
   printf %"$COLUMNS"s | tr " " "-"
 }
+get_os="$(os)"
+get_term="$(term)"
+get_date="$(_date)"
+get_song="$(song)"
+get_kernel="$(kernel)"
+get_shell="$(shell)"
+get_battery="$(_battery)"
+get_uptime="$(uptime)"
+get_packages="$(packages)"
 
 function main() {
-local get_os="$(os)" get_term="$(term)" get_date="$(_date)"
-local get_song="$(song)" get_kernel="$(kernel)" get_shell="$(shell)"
-local get_battery="$(_battery)" get_uptime="$(uptime)" get_packages="$(packages)"
 default_header
 default_header
 fetch ${_char}" "" "" os >>" "$(os) ($(arch))" "${_char}"
