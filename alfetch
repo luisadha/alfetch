@@ -196,16 +196,16 @@ export -f ismytermux mytermux_font mytermux_colorscheme _song _os _term _arch _d
 
 
 #results=$(parallel ::: \
-    "_os" \
-    "_arch" \
-    "_term" \
-    "_date" \
-    "_song" \
-    "_kernel" \
-    "_shell" \
-    "_battery" \
-    "_uptime" \
-    "_packages")
+ #   "_os" \
+#    "_arch" \
+#    "_term" \
+#    "_date" \
+#    "_song" \
+#    "_kernel" \
+#    "_shell" \
+ #   "_battery" \
+ #   "_uptime" \
+ #   "_packages")
 
 #mapfile -t outputs <<< "$results"
 
