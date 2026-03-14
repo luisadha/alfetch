@@ -5,7 +5,7 @@
 # Copyright (c) 2023 Luis Adha
 #set -xv
 version="v0.0.7"
-ALFETCH_CONF_VCODE='005'
+ALFETCH_CONF_VCODE='007'
 # 0.0.5b
 # ~ Fix bug minor
 # ~ Replace tr to sed
@@ -183,16 +183,51 @@ function default_header() {
 
   printf %"$COLUMNS"s | tr " " "-"
 }
-get_os="$(os)"
-get_arch="$(arch)"
-get_term="$(term)"
-get_date="$(_date)"
-get_song="$(song)"
-get_kernel="$(kernel)"
-get_shell="$(shell)"
-get_battery="$(_battery)"
-get_uptime="$(uptime)"
-get_packages="$(packages)"
+
+
+#!/bin/bash
+
+# Pastikan GNU parallel terinstal
+# sudo apt install parallel   # untuk Debian/Ubuntu
+
+# Fungsi contoh (ganti dengan perintah sebenarnya)
+os() { echo "Linux"; }
+arch() { echo "x86_64"; }
+term() { echo "xterm"; }
+_date() { date; }
+song() { echo "Imagine"; }
+kernel() { uname -r; }
+shell() { echo "$SHELL"; }
+_battery() { echo "85%"; }
+uptime() { echo "$(uptime -p)"; }
+packages() { echo "120"; }
+
+results=$(parallel ::: \
+    "os" \
+    "arch" \
+    "term" \
+    "_date" \
+    "song" \
+    "kernel" \
+    "shell" \
+    "_battery" \
+    "uptime" \
+    "packages")
+
+mapfile -t outputs <<< "$results"
+
+get_os=${outputs[0]}
+get_arch=${outputs[1]}
+get_term=${outputs[2]}
+get_date=${outputs[3]}
+get_song=${outputs[4]}
+get_kernel=${outputs[5]}
+get_shell=${outputs[6]}
+get_battery=${outputs[7]}
+get_uptime=${outputs[8]}
+get_packages=${outputs[9]}
+
+
 
 function main() {
 default_header
