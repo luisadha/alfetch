@@ -184,6 +184,8 @@ function default_header() {
   printf %"$COLUMNS"s | tr " " "-"
 }
 
+export -f ismytermux mytermux_font mytermux_colorscheme song os term arch _date _battery uptimes packages shell kernel
+
 
 results=$(parallel ::: \
     "os" \
