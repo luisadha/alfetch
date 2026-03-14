@@ -61,7 +61,7 @@ _date() { date; }
 _kernel() { uname -r; }
 _shell() {
   if [ "$(basename "$SHELL")" = "bash" ]; then
-    bash --version | head -n1 | awk '{print $1 " " $4}'
+    bash --version | head -n1 | awk '{print $1 " " $2 " " $4}'
   elif [ "$(basename "$SHELL")" = "zsh" ]; then
     echo "zsh $ZSH_VERSION"
   else
