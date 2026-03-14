@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 # Alfetch - a CLI Bash script to show system information on Android devices in termux 
 # Version : v0.0.5b
 # Created : 9 November 2023
@@ -184,23 +184,6 @@ function default_header() {
   printf %"$COLUMNS"s | tr " " "-"
 }
 
-
-#!/bin/bash
-
-# Pastikan GNU parallel terinstal
-# sudo apt install parallel   # untuk Debian/Ubuntu
-
-# Fungsi contoh (ganti dengan perintah sebenarnya)
-os() { echo "Linux"; }
-arch() { echo "x86_64"; }
-term() { echo "xterm"; }
-_date() { date; }
-song() { echo "Imagine"; }
-kernel() { uname -r; }
-shell() { echo "$SHELL"; }
-_battery() { echo "85%"; }
-uptime() { echo "$(uptime -p)"; }
-packages() { echo "120"; }
 
 results=$(parallel ::: \
     "os" \
