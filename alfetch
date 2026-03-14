@@ -119,10 +119,10 @@ term() {
   echo -n "$TERM"; }
 arch() {
  uname -m || dpkg --print-architecture; }
-get_date() {
+_date() {
   command date; 
 }
-get_battery() {
+_battery() {
  termux-battery-status | jq -r '"\(.percentage)% \(.status | gsub("_"; " ") | ascii_downcase)"'
 }
 battery_state() {
@@ -185,6 +185,9 @@ function default_header() {
 }
 
 function main() {
+local get_os="$(os)" get_term="$(term)" get_date="$(_date)"
+local get_song="$(song)" get_kernel="$(kernel)" get_shell="$(shell)"
+local get_battery="$(_battery)" get_uptime="$(uptime)" get_packages="$(packages)"
 default_header
 default_header
 fetch ${_char}" "" "" os >>" "$(os) ($(arch))" "${_char}"
